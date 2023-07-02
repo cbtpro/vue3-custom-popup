@@ -1,5 +1,6 @@
-# Vue 3 + TypeScript + Vite
+# 基于vue3的命令式弹窗
 
+![预览](https://blog.chenbitao.com/vue3-custom-popup/%E5%91%BD%E4%BB%A4%E5%BC%8F%E7%BC%96%E7%A8%8B%E5%BC%B9%E7%AA%97.gif)
 This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
 ## Recommended IDE Setup
