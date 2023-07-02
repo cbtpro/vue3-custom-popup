@@ -25,7 +25,7 @@ import {
 } from 'vue'
 import { randomString } from '@/utils'
 
-type Data = Record<string, unknown>
+// type Data = Record<string, unknown>
 
 type RawSlots = {
   [name: string]: unknown
