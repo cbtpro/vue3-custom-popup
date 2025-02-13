@@ -79,7 +79,14 @@ export const useEventNotificationPopup = () => {
         },
       },
       {
-        default: () => h(NewEventAnnouncement),
+        default: () => h(NewEventAnnouncement, {
+          onClose: closeNewEventAnnouncementHandle,
+          onCustomEvent: () => {
+            // 点击新活动时的逻辑
+            closeNewEventAnnouncementHandle();
+            alert('自定义事件');
+          },
+        }),
         close: () => h(ButtonClose),
       }
     )

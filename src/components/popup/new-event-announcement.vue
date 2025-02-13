@@ -15,10 +15,23 @@
 -->
 
 <script setup lang="ts">
+const emits = defineEmits<{
+  (e: 'close'): void;
+  (e: 'customEvent'): void;
+}>();
+
+const closeHandle = () => {
+  emits('close');
+};
+const customEvent = () => {
+  emits('customEvent');
+};
 </script>
 
 <template>
   新活动预告
+  <button @click="closeHandle">自定义关闭按钮</button>
+  <button @click="customEvent">自定义事件</button>
 </template>
 
 <style lang="less" scoped>
