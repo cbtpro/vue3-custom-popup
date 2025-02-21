@@ -42,10 +42,10 @@ jobs:
         uses: actions/configure-pages@v4
       
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1  # ✅ 确保是最新的 upload-pages-artifact
+        uses: actions/upload-artifact@v4
         with:
           path: 'dist'
       
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1  # ✅ 这里改成 v1
+        uses: actions/deploy-pages@v1
