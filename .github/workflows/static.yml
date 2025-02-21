@@ -29,8 +29,14 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: 检出代码
         uses: actions/checkout@v4
+
+      - name: 设置 Node.js 版本
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18  # ✅ 指定 Node.js 版本
+          cache: 'npm'  # ✅ 缓存 npm 依赖，加快安装速度
       
       - name: Install dependencies
         run: npm i
