@@ -1,57 +1,63 @@
-# Simple workflow for deploying static content to GitHub Pages
+# Simple workflow for deploying static content to Pages
 name: Deploy static content to Pages
 
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
+    branches: ['main']
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  pages: write # 允许写入 GitHub Pages
+  id-token: write # 允许身份验证
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
 
       - name: 设置 Node.js 版本
-        uses: actions/setup-node@v4
+        uses: pnpm/action-setup@v4.1.0
         with:
-          node-version: 18  # ✅ 指定 Node.js 版本
-          cache: 'npm'  # ✅ 缓存 npm 依赖，加快安装速度
-      
-      - name: Install dependencies
-        run: npm i
-      
-      - name: Build project
-        run: npm run build
-      
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      
+          version: 10.4.1 # optional
+
+      - name: 安装依赖
+        run: pnpm install
+
+      - name: 构建项目
+        run: pnpm run build:prod
+
+      - name: 检查 dist 目录是否存在
+        run: ls -l dist # 确保 dist 目录存在
+
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: 'dist'
-      
+          name: github-pages # 这里必须使用 "github-pages" 这个名称
+          path: dist # 你的构建产物目录
+
+  deploy:
+    needs: build
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: dist
+
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
