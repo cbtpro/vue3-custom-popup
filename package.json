@@ -13,11 +13,11 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@types/node": "^20.17.17",
+    "@types/node": "^20.17.19",
     "@vitejs/plugin-vue": "^4.6.2",
     "typescript": "^5.7.3",
     "vite": "^4.5.9",
-    "vue-tsc": "^2.2.2"
+    "vue-tsc": "^2.2.4"
   },
   "engines": {
     "node": ">=14.20.1",

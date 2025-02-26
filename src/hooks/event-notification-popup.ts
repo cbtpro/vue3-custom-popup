@@ -15,21 +15,21 @@
 /**
  * 活动相关的弹窗
  */
-import { h } from 'vue'
-import { usePopup } from '@/hooks/popup'
-import CustomPopupContainer from '@/components/popup/index.vue'
-import EventNotification from '@/components/popup/event-notification.vue'
-import NewEventAnnouncement from '@/components/popup/new-event-announcement.vue'
-import ButtonClose from '@/components/popup/button-close.vue'
+import { h } from 'vue';
+import { usePopup } from '@/hooks/popup';
+import CustomPopupContainer from '@/components/popup/index.vue';
+import EventNotification from '@/components/popup/event-notification.vue';
+import NewEventAnnouncement from '@/components/popup/new-event-announcement.vue';
+import ButtonClose from '@/components/popup/button-close.vue';
 
 export const useEventNotificationPopup = () => {
   /**
    * 当前进行中的活动弹窗
    */
   const closeEventNotificationHandle = () => {
-    console.log('close')
-    eventNotificationPopup.destroy()
-  }
+    console.log('close');
+    eventNotificationPopup.destroy();
+  };
 
   const eventNotificationPopup = usePopup(
     h(
@@ -48,21 +48,21 @@ export const useEventNotificationPopup = () => {
       {
         default: () => h(EventNotification),
         close: () => h(ButtonClose),
-      }
-    )
-  )
+      },
+    ),
+  );
 
   const openEventNotificationPopup = () => {
-    eventNotificationPopup.show()
-  }
+    eventNotificationPopup.show();
+  };
 
   /**
    * 新活动预告
    */
   const closeNewEventAnnouncementHandle = () => {
-    console.log('close')
-    newEventNotificationPopup.destroy()
-  }
+    console.log('close');
+    newEventNotificationPopup.destroy();
+  };
 
   const newEventNotificationPopup = usePopup(
     h(
@@ -79,25 +79,26 @@ export const useEventNotificationPopup = () => {
         },
       },
       {
-        default: () => h(NewEventAnnouncement, {
-          onClose: closeNewEventAnnouncementHandle,
-          onCustomEvent: () => {
-            // 点击新活动时的逻辑
-            closeNewEventAnnouncementHandle();
-            alert('自定义事件');
-          },
-        }),
+        default: () =>
+          h(NewEventAnnouncement, {
+            onClose: closeNewEventAnnouncementHandle,
+            onCustomEvent: () => {
+              // 点击新活动时的逻辑
+              closeNewEventAnnouncementHandle();
+              alert('自定义事件');
+            },
+          }),
         close: () => h(ButtonClose),
-      }
-    )
-  )
+      },
+    ),
+  );
 
   const openNewEventNotificationPopup = () => {
-    newEventNotificationPopup.show()
-  }
+    newEventNotificationPopup.show();
+  };
 
   return {
     openEventNotificationPopup,
     openNewEventNotificationPopup,
-  }
-}
+  };
+};
